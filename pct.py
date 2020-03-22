@@ -1,40 +1,38 @@
+#!/usr/bin/env python3
 # Project Clock Timer
 import time
 import sys
-
-# Snippet I took from SO, works for what I need it to do.
+# from . import countui # import tkinter UI
 
 print('Enter lenght of time for project')
-print(' ')
+day=input('Enter # of days: ')
+hour=input('Enter # of hours: ')
 
-dy=input('Enter # of days: ')
-hr=input('Enter # of hours: ')
-print(' ')
-
-day=int(dy)
-hour=int(hr)
+days=int(day)
+hours=int(hour)
 min = 0
 sec= 60
 
+eop = 'Times Up'
+unc = 'Under Construction'
+ 
+while days > -1:
+    while hours > -1:
+        while min > -1:
+            while sec > 0:
+                sec=sec-1
+                time.sleep(1)
+                s = ('%02.f' % sec)  # format
+                m = ('%02.f' % min)
+                h = ('%02.f' % hours)
+                d = ('%02.f' % days)
+                sys.stdout.write('\r' + str(d) + ':' + str(h) + ':' + str(m) + ':' + str(s))
+                print(': '+ unc, end='\r')
+            min=min-1
+            sec=60
+        hours=hours-1
+        min=59
+    days=days-1
+    hours=23
 
-# Take a look at the while statements. Can this be written better?
-
-
-while day > -1:
-    while hour > -1:
-        sec=sec-1
-        time.sleep(1)
-        sec1 = ('%02.f' % sec)  # format
-        min1 = ('%02.f' % min)
-        hour1 = ('%02.f' % hour)
-        day1 = ('%02.f' % day)
-        sys.stdout.write('\r' + str(day1) + ':' + str(hour1) + ':' + str(min1) + ':' + str(sec1))
-
-    hour=hour-1
-    sec=60
-day=day-1
-min=59
-
-Print('Countdown Complete.')
-time.sleep(30)
-
+Print(eop)
