@@ -2,9 +2,11 @@
 # UI for Project Countdown
 #from tkinter import *
 import tkinter as tk
-
+from tkinter import ttk
+from tkcalendar import Calendar
 
 class MainWin:
+    '''Main GUI window to view status of project'''
     def __init__(self, master):
         self.master = master
         self.master.geometry('200x200')
@@ -25,36 +27,42 @@ class MainWin:
         self.master.destroy()
 
 class ProjectWin:
-    def __init__(self, master):
+    '''Second GUI window for creating a new project'''
+    def __init__(self, master): 
         self.master = master
         self.master.geometry('200x200')
         self.frame = tk.Frame(self.master)
-        # self.new_proj('Create New Project')
-        self.quit = tk.Button(self.frame, text = 'Exit', command = self.close_window)
+        self.date = tk.Button(self.frame, text = 'Enter Date', command = self.pick_date_dialog)
+        self.quit = tk.Button(self.frame, text = 'Save', command = self.close_window)
+        self.date.pack()
         self.quit.pack()
         self.frame.pack()
+
+    def pick_date_dialog(self):
+        '''Date pick GUI for user to set project date'''
+        self.datewin = tk.Tk()
+        self.datewin.withdraw()# hide naff extra window
+        self.datewin.title('Please choose a date')
+        def sav_date():
+            self.date = (self.cal.get_date())
+            print(self.date) # change to save the datetime object
+            self.datewin.destroy()
+        self.top = tk.Toplevel(self.datewin)
+        # defaults to today's date
+        self.cal = Calendar(self.top,font="Arial 10", background='darkblue',foreground='white', selectmode='day')
+        self.cal.pack()
+        ttk.Button(self.top, text="Save", command=sav_date).pack()
+        #ttk.Button(self.datewin, text = 'Exit', command = self.close_window).pack()
+       # self.quit.pack()
 
     def close_window(self):
         self.master.destroy()
 
-# create the application
-#myapp1 = MainWin()
-#myapp1.master.title('Project Countdown')
-#days = tk.Entry(myapp1, width=35, borderwidth=5)
-#hours = tk.Entry(myapp1, width=35, borderwidth=5)
-#days.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
-#hours.grid(row=1, column=0, columnspan=5, padx=10, pady=10)
 
 
 
 
-# here are method calls to the window manager class
 
-#myapp.master.title("My Do-Nothing Application")
-#myapp.master.maxsize(1000, 400)
-
-# start the program
-#myapp.mainloop()
 window = tk.Tk()
 app = MainWin(window)
 window.mainloop()
