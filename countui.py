@@ -58,9 +58,14 @@ class ProjectWin:
     def close_window(self):
         self.master.destroy()
 
-
-
-
+# TODO:
+# 1. Add Project name option
+# 2. Save Project name and date objects
+# 3. Call date script for countdown
+# 4. Show/print in GUI
+# 5. Format to look nice
+# 6. Create icon and exe
+# 7. Update comments and README 
 
 
 window = tk.Tk()
