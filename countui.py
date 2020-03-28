@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # UI for Project Countdown
-#from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar
+from pct import *
 
 class MainWin:
     '''Main GUI window to view status of project'''
@@ -34,6 +34,8 @@ class ProjectWin:
         self.frame = tk.Frame(self.master)
         self.date = tk.Button(self.frame, text = 'Enter Date', command = self.pick_date_dialog)
         self.quit = tk.Button(self.frame, text = 'Save', command = self.close_window)
+        self.pName = tk.Text(self.frame, height=4, width=50)
+        self.pName.pack()
         self.date.pack()
         self.quit.pack()
         self.frame.pack()
@@ -43,19 +45,28 @@ class ProjectWin:
         self.datewin = tk.Tk()
         self.datewin.withdraw()# hide naff extra window
         self.datewin.title('Please choose a date')
-        def sav_date():
-            self.date = (self.cal.get_date())
-            print(self.date) # change to save the datetime object
-            self.datewin.destroy()
         self.top = tk.Toplevel(self.datewin)
-        # defaults to today's date
         self.cal = Calendar(self.top,font="Arial 10", background='darkblue',foreground='white', selectmode='day')
         self.cal.pack()
-        ttk.Button(self.top, text="Save", command=sav_date).pack()
-        #ttk.Button(self.datewin, text = 'Exit', command = self.close_window).pack()
-       # self.quit.pack()
+        ttk.Button(self.top, text="ok", command=self.datewin.destroy).pack()
+
+    def sav_date(self):
+        '''Saves the date selected.
+        If none is selected the default date is today'''
+        self.date = (self.cal.get_date())
+        print(self.date) # change to save the datetime object
+
+    def retieve_text(self):
+        '''Save textbox values if no value is select
+        a newline char is saved'''
+        inputValue = self.pName.get('1.0','end-1c')
+        print(inputValue)
 
     def close_window(self):
+        '''Save Text and Date values on save button
+        write try except if no date is selected'''
+        self.sav_date()
+        self.retieve_text()
         self.master.destroy()
 
 # TODO:
