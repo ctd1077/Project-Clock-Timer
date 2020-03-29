@@ -3,19 +3,36 @@
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar
-from pct import *
+import pct
 import pickle
+import time
 
 class MainWin:
     '''Main GUI window to view status of project'''
     def __init__(self, master):
         self.master = master
-        self.master.geometry('200x200')
+        self.master.geometry('500x125')
         self.frame = tk.Frame(self.master)
+        #self.seconds = 0
         self.newproj('Create New Project', ProjectWin)
         self.quit = tk.Button(self.frame, text = 'Exit', command = self.close_window)
+        self.run = pct.main()
+        #self.label_day = tk.Label(text=self.run[0])
+        self.label_hr = tk.Label(text=self.run[0])
+        self.label_min = tk.Label(text=self.run[1])
+        self.label_sec = tk.Label(text=self.run[2])
         self.quit.pack()
+        #self.label_day.pack()
+        self.label_hr.pack()
+        self.label_min.pack()
+        self.label_sec.pack()
         self.frame.pack()
+        global x
+        x = True
+        self.update_sec()
+        self.update_min()
+        self.update_hour()
+        
 
     def newproj(self, text, _class):
         tk.Button(self.frame, text=text, command=lambda: self.proj_win(_class)).pack()
@@ -24,7 +41,26 @@ class MainWin:
         self.new = tk.Toplevel(self.master)
         _class(self.new)
 
+    def update_sec(self):
+        if x == True:
+            self.run = pct.main()
+            self.label_sec.configure(text="%i s" % self.run[2])
+            self.label_sec.after(1000, self.update_sec)
+
+    def update_min(self):
+        if x == True:
+            self.run = pct.main()
+            self.label_min.configure(text="%i m" % self.run[1])
+            self.label_min.after(1000, self.update_min)
+
+    def update_hour(self):
+        if x == True:
+            self.run = pct.main()
+            self.label_hr.configure(text="%i h" % self.run[0])
+            self.label_hr.after(1000, self.update_hour)
+
     def close_window(self):
+        x = False
         self.master.destroy()
 
 class ProjectWin:
@@ -72,7 +108,7 @@ class ProjectWin:
         self.sav_date()
         self.retieve_text()
         self.master.destroy()
-        dict = {'Project_name':date,'Date':inputValue}
+        dict = {'Project_name':inputValue,'Date':date}
         pickle_out = open('dict.pickle', 'wb')
         pickle.dump(dict, pickle_out)
         pickle_out.close()
@@ -80,21 +116,17 @@ class ProjectWin:
 
 
 
-
-
 # TODO:
-# 1. Add Project name option
-# 2. Save Project name and date objects
-# 3. Call date script for countdown
-# 4. Show/print in GUI
-# 5. Format to look nice
-# 6. Create icon and exe
-# 7. Update comments and README 
-
+# 1. Call date script for countdown
+# 2. Show/print in GUI
+# 3. Format to look nice
+# 4. Create icon and exe
+# 5. Update comments and README 
 
 window = tk.Tk()
 app = MainWin(window)
 window.mainloop()
+time.sleep(1)
 
 
 
