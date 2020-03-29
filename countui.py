@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar
 from pct import *
+import pickle
 
 class MainWin:
     '''Main GUI window to view status of project'''
@@ -53,12 +54,15 @@ class ProjectWin:
     def sav_date(self):
         '''Saves the date selected.
         If none is selected the default date is today'''
+        global date
         self.date = (self.cal.get_date())
+        date = self.date
         print(self.date) # change to save the datetime object
 
     def retieve_text(self):
         '''Save textbox values if no value is select
         a newline char is saved'''
+        global inputValue
         inputValue = self.pName.get('1.0','end-1c')
         print(inputValue)
 
@@ -68,6 +72,15 @@ class ProjectWin:
         self.sav_date()
         self.retieve_text()
         self.master.destroy()
+        dict = {'Project_name':date,'Date':inputValue}
+        pickle_out = open('dict.pickle', 'wb')
+        pickle.dump(dict, pickle_out)
+        pickle_out.close()
+        print(dict)
+
+
+
+
 
 # TODO:
 # 1. Add Project name option
