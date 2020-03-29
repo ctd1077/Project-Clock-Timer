@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Project Clock Timer
-#import time
-#import sys
+import pickle
 from datetime import datetime
 
 def days_between(d1, d2):
@@ -15,15 +14,18 @@ def days_hours_minutes_sec(td):
 
 
 if __name__ == '__main__':
-    pn=input("What's the name of project? ")
-    year=input('Enter Year the project will be finished: ')
-    day=input('Enter # of days: ')
-    hour=input('Enter # of hours: ')
-    das = '-'
-    # Need to fix the format of the date entered
-    # go back to JN
-    #d1 = year+das+day+das+hour+das+'0'+das+'0'+das+'0'
-    d1 = '2020-06-12-0-0-0'
+    eop = 'Times Up'
+    unc = 'Under Construction'
+    pickle_in = open('dict.pickle', 'rb')
+    open_dict = pickle.load(pickle_in)
+    date = open_dict['Date'].split('/')
+    year  = date[2]
+    day   = date[1]
+    month = date[0]
+    year = '20'+year # Temp line, need to find a solution 
+    dash = '-'
+    d1 = year+dash+month+dash+day+dash+'0'+dash+'0'+dash+'0'
+
     while True:
         current_date_and_time = datetime.now()
         a = str(current_date_and_time.date())
