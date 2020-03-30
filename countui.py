@@ -128,6 +128,7 @@ class ProjectWin:
 # TODO:
 # 1. Format to look nice
 # 2. Added Message for first time users (Save new project and restart)
+# 3. Clean up code and use pystyle
 # 4. Create icon and exe
 # 5. Update comments and README 
 
