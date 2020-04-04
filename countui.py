@@ -11,40 +11,41 @@ class MainWin:
     '''Main GUI window to view status of project'''
     def __init__(self, master):
         self.master = master
-        self.master.configure(background = '#3d6e87')
+        self.master.configure(background = '#dce0e8')
         self.master.title('Project Countdown Timer')
         self.frame = tk.Frame(self.master)
         self.frame.grid(row=2, columnspan=6)
         self.newproj('Create New Project', ProjectWin)
-        self.quit = tk.Button(self.frame, text = 'Exit', command = self.close_window)
+        self.quit = tk.Button(self.frame, text = 'Exit', 
+        command = self.close_window, bg='#679978')
         self.run = pct.main()
         try:
             self.label_day = tk.Label(text=self.run[0],bd=4,relief='sunken',font='Times 14')
             tDay = tk.Label(text='Days',bd=4,relief='flat',font='Times 12')
-            tDay.configure(background = '#3d6e87')
+            tDay.configure(background = '#dce0e8')
             tDay.grid(column=1, row=1)
-            self.label_day.configure(background = '#75abc7')
+            self.label_day.configure(background = '#f7f9fc')
             self.label_day.grid(column=1, row=0,ipady="20",ipadx="20")
 
             self.label_hr = tk.Label(text=self.run[1],bd=4,relief='sunken',font='Times 14')
             tHr = tk.Label(text='Hours',bd=4,relief='flat',font='Times 12')
-            tHr.configure(background = '#3d6e87')
+            tHr.configure(background = '#dce0e8')
             tHr.grid(column=2, row=1)
-            self.label_hr.configure(background = '#75abc7')
+            self.label_hr.configure(background = '#f7f9fc')
             self.label_hr.grid(column=2, row=0,ipady="20",ipadx="20")
 
             self.label_min = tk.Label(text=self.run[2],bd=4,relief='sunken',font='Times 14')
             tMin = tk.Label(text='Minutes',bd=4,relief='flat',font='Times 12')
-            tMin.configure(background = '#3d6e87')
+            tMin.configure(background = '#dce0e8')
             tMin.grid(column=3, row=1)
-            self.label_min.configure(background = '#75abc7')
+            self.label_min.configure(background = '#f7f9fc')
             self.label_min.grid(column=3, row=0,ipady="20",ipadx="20")
 
             self.label_sec = tk.Label(text=self.run[3],bd=4,relief='sunken',font='Times 14')
             tSec = tk.Label(text='Seconds',relief='flat',font='Times 12')
-            tSec.configure(background = '#3d6e87')
+            tSec.configure(background = '#dce0e8')
             tSec.grid(column=4, row=1)
-            self.label_sec.configure(background = '#75abc7')
+            self.label_sec.configure(background = '#9ca630')
             self.label_sec.grid(column=4, row=0,ipady="20",ipadx="20")
 
             self.quit.grid(column=3, row=2)
@@ -60,7 +61,8 @@ class MainWin:
             self.quit.grid(column=1, row=2)
 
     def newproj(self, text, _class):
-        tk.Button(self.frame, text=text, command=lambda: self.proj_win(_class)).grid(column=4, row=2)
+        tk.Button(self.frame, text=text, bg='#679978',
+        command=lambda: self.proj_win(_class)).grid(column=4, row=2)
 
     def proj_win(self, _class):
         self.new = tk.Toplevel(self.master)
