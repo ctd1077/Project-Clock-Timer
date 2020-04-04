@@ -11,22 +11,44 @@ class MainWin:
     '''Main GUI window to view status of project'''
     def __init__(self, master):
         self.master = master
-        self.master.geometry('500x150')
+        self.master.configure(background = '#3d6e87')
+        self.master.title('Project Countdown Timer')
         self.frame = tk.Frame(self.master)
+        self.frame.grid(row=2, columnspan=6)
         self.newproj('Create New Project', ProjectWin)
         self.quit = tk.Button(self.frame, text = 'Exit', command = self.close_window)
         self.run = pct.main()
         try:
-            self.label_day = tk.Label(text=self.run[0])
-            self.label_hr = tk.Label(text=self.run[1])
-            self.label_min = tk.Label(text=self.run[2])
-            self.label_sec = tk.Label(text=self.run[3])
-            self.quit.pack()
-            self.label_day.pack()
-            self.label_hr.pack()
-            self.label_min.pack()
-            self.label_sec.pack()
-            self.frame.pack()
+            self.label_day = tk.Label(text=self.run[0],bd=4,relief='sunken',font='Times 14')
+            tDay = tk.Label(text='Days',bd=4,relief='flat',font='Times 12')
+            tDay.configure(background = '#3d6e87')
+            tDay.grid(column=1, row=1)
+            self.label_day.configure(background = '#75abc7')
+            self.label_day.grid(column=1, row=0,ipady="20",ipadx="20")
+
+            self.label_hr = tk.Label(text=self.run[1],bd=4,relief='sunken',font='Times 14')
+            tHr = tk.Label(text='Hours',bd=4,relief='flat',font='Times 12')
+            tHr.configure(background = '#3d6e87')
+            tHr.grid(column=2, row=1)
+            self.label_hr.configure(background = '#75abc7')
+            self.label_hr.grid(column=2, row=0,ipady="20",ipadx="20")
+
+            self.label_min = tk.Label(text=self.run[2],bd=4,relief='sunken',font='Times 14')
+            tMin = tk.Label(text='Minutes',bd=4,relief='flat',font='Times 12')
+            tMin.configure(background = '#3d6e87')
+            tMin.grid(column=3, row=1)
+            self.label_min.configure(background = '#75abc7')
+            self.label_min.grid(column=3, row=0,ipady="20",ipadx="20")
+
+            self.label_sec = tk.Label(text=self.run[3],bd=4,relief='sunken',font='Times 14')
+            tSec = tk.Label(text='Seconds',relief='flat',font='Times 12')
+            tSec.configure(background = '#3d6e87')
+            tSec.grid(column=4, row=1)
+            self.label_sec.configure(background = '#75abc7')
+            self.label_sec.grid(column=4, row=0,ipady="20",ipadx="20")
+
+            self.quit.grid(column=3, row=2)
+            #self.frame.grid(row=2, columnspan=4)
             global x
             x = True
             self.update_sec()
@@ -34,11 +56,11 @@ class MainWin:
             self.update_hour()
             self.update_day()
         except:
-            self.frame.pack()
-            self.quit.pack()
+            self.frame.grid(row=2, columnspan=4)
+            self.quit.grid(column=1, row=2)
 
     def newproj(self, text, _class):
-        tk.Button(self.frame, text=text, command=lambda: self.proj_win(_class)).pack()
+        tk.Button(self.frame, text=text, command=lambda: self.proj_win(_class)).grid(column=4, row=2)
 
     def proj_win(self, _class):
         self.new = tk.Toplevel(self.master)
@@ -47,25 +69,25 @@ class MainWin:
     def update_sec(self):
         if x == True:
             self.run = pct.main()
-            self.label_sec.configure(text="%i s" % self.run[3])
+            self.label_sec.configure(text="%i" % self.run[3])
             self.label_sec.after(1000, self.update_sec)
 
     def update_min(self):
         if x == True:
             self.run = pct.main()
-            self.label_min.configure(text="%i m" % self.run[2])
+            self.label_min.configure(text="%i" % self.run[2])
             self.label_min.after(1000, self.update_min)
 
     def update_hour(self):
         if x == True:
             self.run = pct.main()
-            self.label_hr.configure(text="%i h" % self.run[1])
+            self.label_hr.configure(text="%i" % self.run[1])
             self.label_hr.after(1000, self.update_hour)
 
     def update_day(self):
         if x == True:
             self.run = pct.main()
-            self.label_day.configure(text="%i d" % self.run[0])
+            self.label_day.configure(text="%i" % self.run[0])
             self.label_day.after(1000, self.update_day)
 
     def close_window(self):
