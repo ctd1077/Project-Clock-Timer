@@ -11,45 +11,47 @@ class MainWin:
     '''Main GUI window to view status of project'''
     def __init__(self, master):
         self.master = master
-        self.master.configure(background = '#dce0e8')
-        self.master.title('Project Countdown Timer')
+        self.master.configure(background = '#8da0c7')
+        self.master.title('Project Timer')
+        #self.master.geometry('325x170')
         self.frame = tk.Frame(self.master)
         self.frame.grid(row=3, columnspan=6)
         self.newproj('Create New Project', ProjectWin)
         self.quit = tk.Button(self.frame, text = 'Exit', 
-        command = self.close_window, bg='#679978')
+        command = self.close_window, bg='#000000',fg='white')
         self.run = pct.main()
         self.pname = pct.prod_name()
         try:
-            self.prod_name = tk.Label(text=self.pname)
+            self.prod_name = tk.Label(text=self.pname, bd=1,font='Times 14 bold')
+            self.prod_name.configure(background = '#8da0c7')
             self.prod_name.grid(column = 2, row = 0, columnspan = 2)
 
             self.label_day = tk.Label(text=self.run[0],bd=4,relief='sunken',font='Times 14')
             tDay = tk.Label(text='Days',bd=4,relief='flat',font='Times 12')
-            tDay.configure(background = '#dce0e8')
+            tDay.configure(background = '#8da0c7')
             tDay.grid(column=1, row=2)
-            self.label_day.configure(background = '#f7f9fc')
+            self.label_day.configure(background = '#d1dbf0')
             self.label_day.grid(column=1, row=1,ipady="20",ipadx="20")
 
             self.label_hr = tk.Label(text=self.run[1],bd=4,relief='sunken',font='Times 14')
             tHr = tk.Label(text='Hours',bd=4,relief='flat',font='Times 12')
-            tHr.configure(background = '#dce0e8')
+            tHr.configure(background = '#8da0c7')
             tHr.grid(column=2, row=2)
-            self.label_hr.configure(background = '#f7f9fc')
+            self.label_hr.configure(background = '#d1dbf0')
             self.label_hr.grid(column=2, row=1,ipady="20",ipadx="20")
 
             self.label_min = tk.Label(text=self.run[2],bd=4,relief='sunken',font='Times 14')
             tMin = tk.Label(text='Minutes',bd=4,relief='flat',font='Times 12')
-            tMin.configure(background = '#dce0e8')
+            tMin.configure(background = '#8da0c7')
             tMin.grid(column=3, row=2)
-            self.label_min.configure(background = '#f7f9fc')
+            self.label_min.configure(background = '#d1dbf0')
             self.label_min.grid(column=3, row=1,ipady="20",ipadx="20")
 
             self.label_sec = tk.Label(text=self.run[3],bd=4,relief='sunken',font='Times 14')
             tSec = tk.Label(text='Seconds',relief='flat',font='Times 12')
-            tSec.configure(background = '#dce0e8')
+            tSec.configure(background = '#8da0c7')
             tSec.grid(column=4, row=2)
-            self.label_sec.configure(background = '#9ca630')
+            self.label_sec.configure(background = '#d1dbf0')
             self.label_sec.grid(column=4, row=1,ipady="20",ipadx="20")
 
             self.quit.grid(column=3, row=3)
@@ -64,7 +66,7 @@ class MainWin:
             self.quit.grid(column=1, row=2)
 
     def newproj(self, text, _class):
-        tk.Button(self.frame, text=text, bg='#679978',
+        tk.Button(self.frame, text=text, bg='#000000', fg='white',
         command=lambda: self.proj_win(_class)).grid(column=4, row=3)
 
     def proj_win(self, _class):
@@ -100,22 +102,27 @@ class MainWin:
         self.master.destroy()
 
 class ProjectWin:
-    '''Second GUI window for creating a new project'''
+    '''Second window for creating a new project'''
     def __init__(self, master): 
         self.master = master
+        self.master.title('New Project')
         self.frame = tk.Frame(self.master)
-        self.master.configure(background = '#dce0e8')
-        self.master.title('Project Countdown Timer')
-        self.frame = tk.Frame(self.master)
-        self.date = tk.Button(self.frame, text = 'Enter Date', command = self.pick_date_dialog)
-        self.quit = tk.Button(self.frame, text = 'Save', command = self.close_window)
-        self.pName = tk.Text(self.frame, height=4, width=50)
-        self.pName.grid(column=0, row=0,ipady="20",ipadx="20")
-        self.date.grid(column=1, row=1,ipady="20",ipadx="20")
-        self.quit.grid(column=0, row=1,ipady="20",ipadx="20")
-        self.frame.grid(row=2, columnspan=3)
+        self.frame.configure(background = '#8da0c7')
+        self.date = tk.Button(self.frame, text = 'Enter Date', bg='#000000', fg='white',
+        command = self.pick_date)
+        self.quit = tk.Button(self.frame, text = 'Save', bg='#000000', fg='white',
+        command = self.close_window)
+        self.pTitle = tk.Label(self.frame,text='Enter Project Name: ',
+        bd=2,relief='groove',font='Times 12 bold',bg = '#8da0c7')
+        self.pTitle.grid(column=0, row=0,ipady="8",ipadx="20")
+        self.pName = tk.Text(self.frame, height=2, width=30,bd=2,relief='sunk')
+        self.pName.configure(background = '#d1dbf0')
+        self.pName.grid(column=1, row=0)
+        self.date.grid(column=0, row=1)
+        self.quit.grid(column=1, row=1)
+        self.frame.grid(row=1, columnspan=1)
 
-    def pick_date_dialog(self):
+    def pick_date(self):
         '''Date pick GUI for user to set project date'''
         self.datewin = tk.Tk()
         self.datewin.withdraw()# hide naff extra window
@@ -153,88 +160,13 @@ class ProjectWin:
         print(dict)
 
 
-
 # TODO:
-# 1. Format to look nice
-# 2. Added Message for first time users (Save new project and restart)
-# 3. Clean up code and use pystyle
-# 4. Create icon and exe
-# 5. Update comments and README 
+# 1. Added Message for first time users (Save new project and restart)
+# 2. Clean up code and use pystyle
+# 3. Create icon and exe
+# 4. Update comments and README 
 
 window = tk.Tk()
 app = MainWin(window)
 window.mainloop()
 time.sleep(1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# root = Tk()
-# root.title('Project Countdown')
-# days = Entry(root, width=35, borderwidth=5)
-# hours = Entry(root, width=35, borderwidth=5)
-# days.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
-# hours.grid(row=1, column=0, columnspan=5, padx=10, pady=10)
-
-# # The onlick function should submit the data
-# def onClick(number):
-#     current = e.get() # First save the current number displayed
-#     e.delete(0, END) # Next delete the current number displayed
-#     e.insert(0, str(current) + str(number)) # Make sure the 
-
-# # Clear the data second func to delete the project
-# def onClear():
-#     days.delete(0,END)
-#     hours.delete(0,END)
-
-# # def onAdd():
-# #     first_num = e.get()
-# #     global f_num
-# #     global math
-# #     math = 'addition'
-# #     f_num = int(first_num)
-# #     e.delete(0,END)
-
-# # Define Buttons
-# button_1 = Button(root, text='Submit', command=lambda: onClick(1), padx=40, pady=20)
-# button_2 = Button(root, text='Clear', command=lambda: onClear(), padx=40, pady=20)
-# button_3 = Button(root, text="Exit", command=root.destroy, padx=40, pady=20)
-
-# # Add the button on the screen
-# button_1.grid(row=3, column=0)
-# button_2.grid(row=3, column=1)
-# button_3.grid(row=3, column=2)
-
-# root.mainloop()
