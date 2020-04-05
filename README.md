@@ -2,7 +2,7 @@
 
 This is a project timer. A simple UI that counts down the time you allocated for your project to be completed.
 
-![](Images/4.png)
+![](image/4.png)
 
 
 ## Getting Started
