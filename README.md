@@ -43,7 +43,7 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Versioning
 
-For the versions available, see the [ctd1077](https://github.com/ctd1077/Project-Clock-Timer). 
+For the versions available, see the [Project Clock Timer](https://github.com/ctd1077/Project-Clock-Timer). 
 
 ## Authors
 
