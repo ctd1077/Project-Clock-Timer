@@ -7,7 +7,8 @@ This is a project timer. A simple UI that counts down the time you allocated for
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Download teh EXE file. When first running the program you'll be asked to enter project information. After the information is entered, restart. A pickle file will be created in the directory you keep the EXE
+
 
 ### Prerequisites
 
@@ -35,9 +36,6 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
@@ -45,7 +43,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+For the versions available, see the [ctd1077](https://github.com/ctd1077/Project-Clock-Timer). 
 
 ## Authors
 

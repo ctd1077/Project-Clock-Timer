@@ -8,7 +8,7 @@ import pickle
 import time
 
 class MainWin:
-    '''Main GUI window to view status of project'''
+    '''Main window to view status of project'''
     def __init__(self, master):
         self.master = master
         self.master.configure(background = '#8da0c7')
@@ -19,9 +19,13 @@ class MainWin:
         self.newproj('Create New Project', ProjectWin)
         self.quit = tk.Button(self.frame, text = 'Exit', 
         command = self.close_window, bg='#000000',fg='white')
-        self.run = pct.main()
-        self.pname = pct.prod_name()
+        self.quit.grid(column=3, row=3)
+
+        # Try Except for when no project information has been loaded yet
         try:
+            self.run = pct.main()
+            self.pname = pct.prod_name()
+
             self.prod_name = tk.Label(text=self.pname, bd=1,font='Times 14 bold')
             self.prod_name.configure(background = '#8da0c7')
             self.prod_name.grid(column = 2, row = 0, columnspan = 2)
@@ -54,7 +58,7 @@ class MainWin:
             self.label_sec.configure(background = '#d1dbf0')
             self.label_sec.grid(column=4, row=1,ipady="20",ipadx="20")
 
-            self.quit.grid(column=3, row=3)
+            #self.quit.grid(column=3, row=3)
             global x
             x = True
             self.update_sec()
@@ -62,10 +66,14 @@ class MainWin:
             self.update_hour()
             self.update_day()
         except:
-            self.frame.grid(row=2, columnspan=4)
-            self.quit.grid(column=1, row=2)
+            message = tk.Label(text="Please click the 'Create New Project' button to start",
+            bd=4,relief='flat',font='Times 12')
+            message.configure(background = '#8da0c7')
+            message.grid(column=1, row=0)
+            self.frame.grid(row=2, columnspan=2)
 
     def newproj(self, text, _class):
+        '''Create new project button and class the ProjectWindow function'''
         tk.Button(self.frame, text=text, bg='#000000', fg='white',
         command=lambda: self.proj_win(_class)).grid(column=4, row=3)
 
@@ -74,6 +82,7 @@ class MainWin:
         _class(self.new)
 
     def update_sec(self):
+        '''This functions update main func in pct every 1000 millisecs'''
         if x == True:
             self.run = pct.main()
             self.label_sec.configure(text="%i" % self.run[3])
@@ -98,6 +107,7 @@ class MainWin:
             self.label_day.after(1000, self.update_day)
 
     def close_window(self):
+        '''Close main window and program'''
         x = False
         self.master.destroy()
 
@@ -123,7 +133,7 @@ class ProjectWin:
         self.frame.grid(row=1, columnspan=1)
 
     def pick_date(self):
-        '''Date pick GUI for user to set project date'''
+        '''Pick date for user to set project date'''
         self.datewin = tk.Tk()
         self.datewin.withdraw()# hide naff extra window
         self.datewin.title('Please choose a date')
@@ -138,14 +148,12 @@ class ProjectWin:
         global date
         self.date = (self.cal.get_date())
         date = self.date
-        print(self.date) # change to save the datetime object
 
     def retieve_text(self):
         '''Save textbox values if no value is select
         a newline char is saved'''
         global inputValue
         inputValue = self.pName.get('1.0','end-1c')
-        print(inputValue)
 
     def close_window(self):
         '''Save Text and Date values on save button
@@ -157,16 +165,9 @@ class ProjectWin:
         pickle_out = open('dict.pickle', 'wb')
         pickle.dump(dict, pickle_out)
         pickle_out.close()
-        print(dict)
+        # print(dict) # Print out project name and date for debugging
 
-
-# TODO:
-# 1. Added Message for first time users (Save new project and restart)
-# 2. Clean up code and use pystyle
-# 3. Create icon and exe
-# 4. Update comments and README 
 
 window = tk.Tk()
 app = MainWin(window)
 window.mainloop()
-time.sleep(1)
