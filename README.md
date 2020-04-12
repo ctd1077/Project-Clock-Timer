@@ -18,8 +18,10 @@ No preequistes
 
 ### Installing
 
-Download the EXE. When creating a new project dict.pickle file will be created. 
+Download the EXE.
 Enter and save your project information. Exit and restart to see your project and countdown timer.
+When creating a new project a dict.pickle file will be created that contains your project info. 
+
 
 ## Built With
 
