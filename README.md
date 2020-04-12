@@ -12,14 +12,14 @@ Download teh EXE file. When first running the program you'll be asked to enter p
 
 ### Prerequisites
 
-
 ```
-No preequistes. Just download and use.
+No preequistes
 ```
 
 ### Installing
 
-Download the EXE when avaiable (Coming soon)
+Download the EXE. When creating a new project dict.pickle file will be created. 
+Enter and save your project information. Exit and restart to see your project and countdown timer.
 
 ## Built With
 
