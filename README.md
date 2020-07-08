@@ -7,7 +7,7 @@ This is a project timer. A simple UI that counts down the time you allocated for
 
 ## Getting Started
 
-Download teh EXE file. When first running the program you'll be asked to enter project information. After the information is entered, restart. A pickle file will be created in the directory you keep the EXE
+Download the EXE file. When first running the program you'll be asked to enter project information. After the information is entered, restart. A pickle file will be created in the directory you keep the EXE
 
 
 ### Prerequisites
@@ -25,11 +25,8 @@ When creating a new project a dict.pickle file will be created that contains you
 
 ## Built With
 
-* [tkinter](https://docs.python.org/3/library/tkinter.html) - The python UI package used
+* [tkinter](https://docs.python.org/3/library/tkinter.html) - The python UI package used on this project.
 
-## Versioning
-
-For the versions available, see the [Project Clock Timer](https://github.com/ctd1077/Project-Clock-Timer). 
 
 ## Authors
 
